@@ -1,0 +1,41 @@
+%button {
+  border: 1px solid $border-color;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  color: $border-color;
+  background-color: $button-color;
+  border-radius: 3px;
+
+  transition: color 250ms $timing-function,
+    background-color 250ms $timing-function, border-color 250ms $timing-function;
+
+  &:hover,
+  &:focus {
+    color: $button-color;
+    background-color: $border-color;
+    border-color: $accent-color;
+  }
+}
+
+%input {
+  padding: 5px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  cursor: pointer;
+  color: inherit;
+
+  transition: border 250ms $timing-function;
+
+  &:hover,
+  &:focus {
+    border: 1px solid $accent-color;
+    outline: none;
+  }
+}
+
+%list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
