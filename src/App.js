@@ -10,6 +10,7 @@ import routes from './routes';
 import { getIsLoading } from './redux/contacts/contacts-selectors';
 import { getCurrentUser } from './redux/auth/auth-operations';
 import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 
 const HomeView = lazy(() =>
   import('./views/HomeView' /* webpackChunkName: "home-page" */),
@@ -40,8 +41,18 @@ class App extends Component {
         <Suspense fallback={<Loader />}>
           <Switch>
             <Route exact path={routes.home} component={HomeView} />
-            <Route path={routes.register} component={RegisterView} />
-            <Route path={routes.login} component={LoginView} />
+            <PublicRoute
+              path={routes.register}
+              restricted
+              redirectTo={routes.contacts}
+              component={RegisterView}
+            />
+            <PublicRoute
+              path={routes.login}
+              restricted
+              redirectTo={routes.contacts}
+              component={LoginView}
+            />
             <PrivateRoute
               path={routes.contacts}
               component={ContactsView}
