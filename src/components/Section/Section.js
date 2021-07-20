@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import "./Section.scss";
+import './Section.scss';
 
 const Section = ({ title, children }) => (
   <section className="section">
@@ -17,7 +17,7 @@ Section.defaultProps = {
 };
 
 Section.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   children: PropTypes.node,
 };
 

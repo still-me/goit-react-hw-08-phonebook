@@ -1,32 +1,50 @@
 import React, { Component } from 'react';
+import { Suspense, lazy } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Section from './components/Section';
-import ContactForm from './components/ContactForm';
-import ContactList from './components/ContactList';
-import Filter from './components/Filter';
 import Loader from './components/Loader';
-import { fetchContactsRequest } from './redux/contacts/contacts-operations';
+import Section from './components/Section';
+import AppBar from './components/AppBar';
+import routes from './routes';
 import { getIsLoading } from './redux/contacts/contacts-selectors';
+import { getCurrentUser } from './redux/auth/auth-operations';
+
+const HomeView = lazy(() =>
+  import('./views/HomeView' /* webpackChunkName: "home-page" */),
+);
+const RegisterView = lazy(() =>
+  import('./views/RegisterView' /* webpackChunkName: "register-page" */),
+);
+const LoginView = lazy(() =>
+  import('./views/LoginView' /* webpackChunkName: "login-page" */),
+);
+const ContactsView = lazy(() =>
+  import('./views/ContactsView' /* webpackChunkName: "contacts-page" */),
+);
 
 class App extends Component {
   state = {};
 
   componentDidMount() {
-    this.props.fetchContacts();
+    this.props.onGetCurrentUser();
   }
+
   render() {
     return (
-      <div>
-        <Section title="Phonebook">
-          {this.props.isLoading && <Loader />}
-          <ContactForm />
-        </Section>
-        <Section title="Contacts">
-          <Filter />
-          <ContactList />
-        </Section>
-      </div>
+      <Section>
+        {this.props.isLoading && <Loader />}
+
+        <AppBar />
+        <Suspense fallback={<Loader />}>
+          <Switch>
+            <Route exact path={routes.home} component={HomeView} />
+            <Route path={routes.register} component={RegisterView} />
+            <Route path={routes.login} component={LoginView} />
+            <Route path={routes.contacts} component={ContactsView} />
+          </Switch>
+        </Suspense>
+      </Section>
     );
   }
 }
@@ -35,8 +53,8 @@ const mapStateToProps = state => ({
   isLoading: getIsLoading(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchContacts: () => dispatch(fetchContactsRequest()),
-});
+const mapDispatchToProps = {
+  onGetCurrentUser: getCurrentUser,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
