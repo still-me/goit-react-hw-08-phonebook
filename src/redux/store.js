@@ -14,6 +14,7 @@ import storage from 'redux-persist/lib/storage';
 
 import contactsReducer from './contacts/contacts-reducer';
 import authReducer from './auth/auth-reducer';
+import loadingReducer from './common/common-reducer';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -34,6 +35,7 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     contacts: contactsReducer,
+    loading: loadingReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',
