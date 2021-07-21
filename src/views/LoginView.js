@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { logIn } from '../redux/auth/auth-operations';
+import { logIn, removeError } from '../redux/auth/auth-operations';
+import { getIsError } from 'redux/auth/auth-selectors';
 
 const styles = {
   form: {
@@ -19,6 +20,10 @@ class LoginView extends Component {
     email: '',
     password: '',
   };
+
+  componentDidMount() {
+    this.props.removeError();
+  }
 
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
@@ -38,6 +43,8 @@ class LoginView extends Component {
     return (
       <div>
         <h1>Страница логина</h1>
+
+        {this.props.isError && <p>email or password is wrong</p>}
 
         <form
           onSubmit={this.handleSubmit}
@@ -71,11 +78,13 @@ class LoginView extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  isError: getIsError(state),
+});
+
 const mapDispatchToProps = {
   onLogin: logIn,
+  removeError: removeError,
 };
 
-export default connect(null, mapDispatchToProps)(LoginView);
-
-// acrossssss@mail.com
-// example12345
+export default connect(mapStateToProps, mapDispatchToProps)(LoginView);

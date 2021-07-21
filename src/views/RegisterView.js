@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { register } from '../redux/auth/auth-operations';
+import { register, removeError } from '../redux/auth/auth-operations';
+import { getIsError } from 'redux/auth/auth-selectors';
 
 const styles = {
   form: {
@@ -21,6 +22,10 @@ class RegisterView extends Component {
     password: '',
   };
 
+  componentDidMount() {
+    this.props.removeError();
+  }
+
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   };
@@ -39,6 +44,7 @@ class RegisterView extends Component {
     return (
       <div>
         <h1>Страница регистрации</h1>
+        {this.props.isError && <p>Please add correct password or email</p>}
 
         <form
           onSubmit={this.handleSubmit}
@@ -82,8 +88,13 @@ class RegisterView extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  isError: getIsError(state),
+});
+
 const mapDispatchToProps = {
   onRegister: register,
+  removeError: removeError,
 };
 
-export default connect(null, mapDispatchToProps)(RegisterView);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterView);

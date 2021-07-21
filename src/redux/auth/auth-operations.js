@@ -70,3 +70,13 @@ export const getCurrentUser = () => async (dispatch, getState) => {
     dispatch(authActions.getCurrentUserError(error.message));
   }
 };
+
+export const removeError = () => (dispatch, getState) => {
+  const {
+    auth: { error: isError },
+  } = getState();
+
+  if (isError) {
+    dispatch(authActions.removeError());
+  }
+};
