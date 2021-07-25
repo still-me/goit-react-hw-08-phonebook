@@ -1,13 +1,9 @@
-@import "styles/shared";
+@import 'styles/shared';
 
 .form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
-  padding: 20px;
-  border: 2px solid $border-color;
-  border-radius: 3px;
 
   &__label {
     display: flex;
@@ -24,4 +20,8 @@
     @extend %button;
     width: 200px;
   }
+}
+
+.contacts__button {
+  @extend %button;
 }

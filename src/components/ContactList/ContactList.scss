@@ -1,4 +1,4 @@
-@import "styles/shared";
+@import 'styles/shared';
 .contacts {
   &__list {
     @extend %list;
@@ -10,7 +10,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 400px;
 
   &:not(:last-child) {
     margin-bottom: 10px;

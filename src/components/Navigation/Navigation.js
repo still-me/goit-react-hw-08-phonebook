@@ -10,10 +10,13 @@ const styles = {
     textDecoration: 'none',
     padding: 12,
     fontWeight: 700,
-    color: '#2A363B',
+    fontSize: '20px',
+    color: '#2a2a2a',
   },
   activeLink: {
-    color: '#E84A5F',
+    color: '#fff',
+    textShadow:
+      '0 0 20px #54f0fa, 0 0 30px #54f0fa, 0 0 40px #54f0fa, 3px -1px 1px #2a2a2a',
   },
 };
 

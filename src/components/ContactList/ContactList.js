@@ -2,14 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import ListGroup from 'react-bootstrap/ListGroup';
+import ListGroupItem from 'react-bootstrap/ListGroupItem';
+
 import './ContactList.scss';
 import { removeContact } from '../../redux/contacts/contacts-operations';
 import { getVisibleContacts } from '../../redux/contacts/contacts-selectors';
 
 const ContactList = ({ contacts, onDeleteContact }) => (
-  <ul className="contacts__list">
+  <ListGroup className="contacts__list">
     {contacts.map(({ id, name, number }) => (
-      <li className="contacts__item" key={id}>
+      <ListGroupItem className="contacts__item" key={id}>
         <p className="contact__info">
           {name}: {number}
         </p>
@@ -20,9 +23,9 @@ const ContactList = ({ contacts, onDeleteContact }) => (
         >
           Delete
         </button>
-      </li>
+      </ListGroupItem>
     ))}
-  </ul>
+  </ListGroup>
 );
 
 ContactList.defaultProps = {
@@ -33,7 +36,8 @@ ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      number: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        .isRequired,
     }),
   ).isRequired,
   onDeleteContact: PropTypes.func,

@@ -89,7 +89,8 @@ ContactForm.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      number: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        .isRequired,
     }),
   ).isRequired,
 };

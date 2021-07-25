@@ -8,8 +8,13 @@ import { getFilterValue } from '../../redux/contacts/contacts-selectors';
 
 const Filter = ({ value, onChange }) => (
   <label className="filter__label">
-    Find contacts by name
-    <input className="filter__input" type="text" value={value} onChange={onChange}></input>
+    <p className="filter__hint">Find contacts by name</p>
+    <input
+      className="filter__input"
+      type="text"
+      value={value}
+      onChange={onChange}
+    ></input>
   </label>
 );
 

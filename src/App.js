@@ -13,7 +13,7 @@ import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 
 const HomeView = lazy(() =>
-  import('./views/HomeView' /* webpackChunkName: "home-page" */),
+  import('./views/HomeView/HomeView' /* webpackChunkName: "home-page" */),
 );
 const RegisterView = lazy(() =>
   import('./views/RegisterView' /* webpackChunkName: "register-page" */),
@@ -33,9 +33,10 @@ class App extends Component {
   }
 
   render() {
+    const { isLoading } = this.props;
     return (
       <Section>
-        {this.props.isLoading && <Loader />}
+        {isLoading && <Loader />}
 
         <AppBar />
         <Suspense fallback={<Loader />}>
